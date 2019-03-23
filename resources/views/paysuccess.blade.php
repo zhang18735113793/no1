@@ -1,16 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>订单详情</title>
-    <meta content="app-id=984819816" name="apple-itunes-app">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no, maximum-scale=1.0">
-    <meta content="yes" name="apple-mobile-web-app-capable">
-    <meta content="black" name="apple-mobile-web-app-status-bar-style">
-    <meta content="telephone=no" name="format-detection">
-	<link rel="stylesheet" href="css/paysuccess.css">
-	<title>Document</title>
-</head>
+@extends('must')
+@section("content")
 <body>
 	<section>
 		<div class="pay-wrapper">
@@ -121,3 +110,4 @@
     </div>
 </body>
 </html>
+	@endsection

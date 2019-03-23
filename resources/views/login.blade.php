@@ -2,20 +2,15 @@
 @section('title','登陆')
 @section('content')
 <body>
-    
+
 <!--触屏版内页头部-->
 <div class="m-block-header" id="div-header">
     <strong id="m-title">登录</strong>
     <a href="javascript:history.back();" class="m-back-arrow"><i class="m-public-icon"></i></a>
     <a href="/" class="m-index-icon"><i class="home-icon"></i></a>
 </div>
-
+<input type="hidden" id="_token" name="_token" value="<?php echo csrf_token(); ?>">
 <div class="wrapper">
-    @if($errors->any())
-        @foreach($errors->all() as $v)
-            <p>{{$v}}</p>
-        @endforeach
-    @endif
     <div class="registerCon">
         <div class="binSuccess5">
             <ul>
@@ -28,38 +23,26 @@
                     </dl>
                     <dl>
                         <input id="txtPassword" type="password" placeholder="密码" value="" maxlength="20" /><b></b>
-                        <input type="hidden" id="_token" name="_token" value="<?php echo csrf_token(); ?>">
                     </dl>
                     <dl>
                         <input id="verifycode" type="text" placeholder="请输入验证码" name="verifycode" maxlength="4" /><b></b>
                         <img src="{{url('verify/create')}}" alt="" id="img">
                     </dl>
+                    <dl>
+                        <a id="btnLogin" href="javascript:;" class="orangeBtn loginBtn">登录</a>
+                    </dl>
                 </li>
             </ul>
-            <a id="btnLogin" href="javascript:;" class="orangeBtn loginBtn">登录</a>
+
         </div>
+
+        <br>
         <div class="forget">
             <a href="https://m.1yyg.com/v44/passport/FindPassword.do">忘记密码？</a>
             <b></b>
             <a href="{{url('IndexController/register')}}">新用户注册</a>
         </div>
     </div>
-    <div class="oter_operation gray9" style="display: none;">
-        
-        <p>登录666潮人购账号后，可在微信进行以下操作：</p>
-        1、查看您的潮购记录、获得商品信息、余额等<br />
-        2、随时掌握最新晒单、最新揭晓动态信息
-    </div>
-</div>
-        
-<div class="footer clearfix" style="display:none;">
-    <ul>
-        <li class="f_home"><a href="/v44/index.do" ><i></i>潮购</a></li>
-        <li class="f_announced"><a href="/v44/lottery/" ><i></i>最新揭晓</a></li>
-        <li class="f_single"><a href="/v44/post/index.do" ><i></i>晒单</a></li>
-        <li class="f_car"><a id="btnCart" href="/v44/mycart/index.do" ><i></i>购物车</a></li>
-        <li class="f_personal"><a href="/v44/member/index.do" ><i></i>我的潮购</a></li>
-    </ul>
 </div>
 </body>
 @endsection

@@ -40,6 +40,12 @@ Route::prefix('IndexController')->group(function () {
     //结算页面
     route::any('payment','IndexController@payment');
     route::any('paymentshow','IndexController@paymentshow');
+    //结算成功
+    route::any('paysuccess','IndexController@paysuccess');
+    //我的钱包
+    route::any('mywallet','IndexController@mywallet');
+    //分享
+    route::any('invite','IndexController@invite');
 });
 //获取验证码图片
 route::any('verify/create','CaptchaController@create');

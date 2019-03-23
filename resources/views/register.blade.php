@@ -1,7 +1,7 @@
 @extends('must')
+@section('title','注册')
 @section('content')
 <body>
-    
 <!--触屏版内页头部-->
 <div class="m-block-header" id="div-header">
     <strong id="m-title">注册</strong>
@@ -11,7 +11,7 @@
     <div class="wrapper">
         <input name="hidForward" type="hidden" id="hidForward" />
         <div class="registerCon">
-
+            <input type="hidden" id="_token" name="_token" value="<?php echo csrf_token(); ?>">
             <ul>
                 <li class="accAndPwd">
                     <dl>
@@ -32,23 +32,24 @@
                         <span class="mr clear">x</span>
                         <s class="eyeclose"></s>
                     </dl>
-                    <ul>
-                        <li>
-                            <input type="text" id="code" name="code" placeholder="请输入验证码" />
-                            <a href="javascript:;" class="sendcode" id="btn">获取验证码</a>
-                        </li>
-                    </ul>
+                    <dl class="a-set">
+                        <input type="text" id="code" name="code" placeholder="请输入验证码" />
+                        <a href="javascript:;" class="sendcode" id="btn">获取验证码</a>
+                    </dl>
+
                     <dl class="a-set">
                         <i class="gou"></i><p>我已阅读并同意《666潮人购购物协议》</p>
                     </dl>
-                    <input type="hidden" id="_token" name="_token" value="<?php echo csrf_token(); ?>">
-
-                </li>
+                    <dl class="a-set">
                 <li><a id="btnNext" href="javascript:;" class="orangeBtn loginBtn">注册</a></li>
+                </dl>
+                </li>
+
+
             </ul>
         </div>
-        
 
+    </div>
 <div class="footer clearfix" style="display:none;">
     <ul>
         <li class="f_home"><a href="/v44/index.do" ><i></i>云购</a></li>
@@ -59,18 +60,21 @@
     </ul>
 </div>
 <div class="layui-layer-move"></div>
+
+
 </body>
+
 @endsection
 @section('my-js')
 <script>
     $('.registerCon input').bind('keydown',function(){
         var that = $(this);
         if(that.val().trim()!=""){
-            
+
             that.siblings('span.clear').show();
             that.siblings('span.clear').click(function(){
                 console.log($(this));
-                
+
                 that.parents('dl').find('input:visible').val("");
                 $(this).hide();
             })
@@ -82,23 +86,23 @@
     })
     function show(){
         if($('.registerCon input').attr('type')=='password'){
-            $(this).prev().prev().val($("#passwd").val()); 
+            $(this).prev().prev().val($("#passwd").val());
         }
     }
     function hide(){
         if($('.registerCon input').attr('type')=='text'){
-            $(this).prev().prev().val($("#passwd").val()); 
+            $(this).prev().prev().val($("#passwd").val());
         }
     }
     $('.registerCon s').bind({click:function(){
         if($(this).hasClass('eye')){
             $(this).removeClass('eye').addClass('eyeclose');
-            
+
             $(this).prev().prev().prev().val($(this).prev().prev().val());
             $(this).prev().prev().prev().show();
             $(this).prev().prev().hide();
 
-           
+
         }else{
                 console.log($(this  ));
                 $(this).removeClass('eyeclose').addClass('eye');
@@ -113,21 +117,21 @@
     function registertel(){
         // 手机号失去焦点
         $('#userMobile').blur(function(){
-            reg=/^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[06-8])\d{8}$/;//验证手机正则(输入前7位至11位)  
+            reg=/^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[06-8])\d{8}$/;//验证手机正则(输入前7位至11位)
             var that = $(this);
-          
-            if( that.val()==""|| that.val()=="请输入您的手机号")  
-            {   
+
+            if( that.val()==""|| that.val()=="请输入您的手机号")
+            {
                 layer.msg('请输入您的手机号！');
-            }  
-            else if(that.val().length<11)  
-            {     
-                layer.msg('您输入的手机号长度有误！'); 
-            }  
-            else if(!reg.test($("#userMobile").val()))  
-            {   
-                layer.msg('您输入的手机号不存在!'); 
-            }  
+            }
+            else if(that.val().length<11)
+            {
+                layer.msg('您输入的手机号长度有误！');
+            }
+            else if(!reg.test($("#userMobile").val()))
+            {
+                layer.msg('您输入的手机号不存在!');
+            }
             else if(that.val().length == 11){
                 // ajax请求后台数据
             }
@@ -136,11 +140,11 @@
         $('.pwd').blur(function(){
             reg=/^[0-9a-zA-Z]{6,16}$/;
             var that = $(this);
-            if( that.val()==""|| that.val()=="6-16位数字或字母组成")  
-            {   
+            if( that.val()==""|| that.val()=="6-16位数字或字母组成")
+            {
                 layer.msg('请设置您的密码！');
-            }else if(!reg.test($(".pwd").val())){   
-                layer.msg('请输入6-16位数字或字母组成的密码!'); 
+            }else if(!reg.test($(".pwd").val())){
+                layer.msg('请输入6-16位数字或字母组成的密码!');
             }
         })
         // 重复输入密码失去焦点时
@@ -169,15 +173,15 @@
 
     })
     // 下一步提交
-    $('#btnNext').click(function(){
-    	if($('#userMobile').val()==''){
-    		layer.msg('请输入您的手机号！');
-    	}else if($('.pwd').val()==''){
-    		layer.msg('请输入您的密码!');
-    	}else if($('.conpwd').val()==''){
-    		layer.msg('请您再次输入密码！');
-    	}
-    })
+    // $('#btnNext').click(function(){
+    // 	if($('#userMobile').val()==''){
+    // 		layer.msg('请输入您的手机号！');
+    // 	}else if($('.pwd').val()==''){
+    // 		layer.msg('请输入您的密码!');
+    // 	}else if($('.conpwd').val()==''){
+    // 		layer.msg('请您再次输入密码！');
+    // 	}
+    // })
 
 
 </script>
@@ -245,7 +249,7 @@
                   function (res) {
                     if(res==1){
                         layer.msg('注册成功',{icon:1,time:3000},function(){
-                            location.href="{{url('IndexController/Login')}}";
+                            location.href="{{url('IndexController/login')}}";
                         });
                     }else if(res==2){
                         layer.msg('注册失败',{icon:2});

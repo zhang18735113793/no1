@@ -42,7 +42,7 @@
             	<i></i>账户总额：<span class="gray9">(￥<em>0.00</em>)</span><em class="orange fr"></em>
             </a>
             <a href="javascript:;" class="wzf checked">
-            	<b class="z-set"></b>第三方支付<em class="orange fr"><span class="colorbbb">需要支付&nbsp;</span><b>￥</b>1.00</em>
+            	<b class="z-set"></b>第三方支付<em class="orange fr"><span class="colorbbb">需要支付&nbsp;</span><b>￥</b>{{$v->self_price*$v->buy_num}}</em>
             </a>
             <div class="net-pay">
                 <a href="javascript:;" class="checked" id="jdPay">
@@ -62,7 +62,7 @@
         <div class="paywrapp" style="display: none">
             <span class="lip">请输入支付密码</span>    
             <span class="title">潮人购充值</span>
-            <span class="money">￥<i>1.00</i></span>
+            <span class="money">￥<i>{{$v->self_price*$v->buy_num}}</i></span>
             <form action="" method="post" name="payPassword" id="form_paypsw">
                 <div id="payPassword_container" class="alieditContainer clearfix" data-busy="0">
                     <div class="i-block" data-error="i_error">
@@ -101,8 +101,8 @@
 			total +=parseInt($('.g-pay-lst li').eq(i).find('dd em.price').text());
 
 		}
-		$('.gray9 .orange').html('<i>￥</i>'+total.toFixed(2));
-		$('.wzf .orange').html('<span class="colorbbb">需要支付&nbsp;</span><b>￥</b>'+total.toFixed(2));
+		//$('.gray9 .orange').html('<i>￥</i>'+total.toFixed(2));
+		//$('.wzf .orange').html('<span class="colorbbb">需要支付&nbsp;</span><b>￥</b>'+total.toFixed(2));
 
 		// 判断选择余额支付还是潮购值支付
 		var chaomoney =parseInt($('.other_pay .chaomoney span.gray9 em').text())/100;
@@ -205,6 +205,11 @@
             type: 1,
             title: false,
             content: $('.paywrapp')
+        })
+    })
+    $('#subbtn').click(function(){
+        layer.msg("支付成功",{icon:1,time:3000},function(){
+            location.href="{{url('IndexController/paysuccess')}}"
         })
     })
         

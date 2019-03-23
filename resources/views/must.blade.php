@@ -23,6 +23,9 @@
     <link href="{{url('css/login.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('css/vccode.css')}}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="{{url('css/modipwd.css')}}">
+    <link rel="stylesheet" href="{{url('css/paysuccess.css')}}">
+    <link href="{{url('css/mywallet.css')}}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{url('css/invite.css')}}">
     <style>
         .Countdown-con {padding: 4px 15px 0px;}
     </style>
@@ -39,7 +42,7 @@
 <script src="http://cdn.bootcss.com/flexslider/2.6.2/jquery.flexslider.min.js"></script>
 <script src="{{url('js/swiper.min.js')}}"></script>
 <script src="{{url('js/photo.js')}}" charset="utf-8"></script>
-
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 @yield('my-js')
 
 

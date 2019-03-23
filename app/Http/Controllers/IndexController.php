@@ -131,7 +131,6 @@ class IndexController extends Controller
     public function userpage()
     {
         $id=session('id');
-
         if(empty($id)){
             return view('login');
         }else{
@@ -214,13 +213,13 @@ class IndexController extends Controller
     //发送短信验证码
     public function code($code,$mobile)
     {
-        $host = env("CODEHOST");
+        $host = env('CODEHOST');
         $path = env("CODEPATH");
         $method = "POST";
         $appcode = env("CODEKEY");
         $headers = array();
         array_push($headers, "Authorization:APPCODE " . $appcode);
-        $querys = "content=【创信】你的验证码是：".$code."，3分钟内有效！&mobile=".$mobile;
+        $querys = "phone=$mobile&templateId=TP18040314&variable=code:$code";
         $bodys = "";
         $url = $host . $path . "?" . $querys;
 
@@ -244,13 +243,27 @@ class IndexController extends Controller
         $goods_id=$request->goods_id;
         session(["goods_id"=>$goods_id]);
     }
-
     public function paymentshow()
     {
         $goods_id=session('goods_id');
         $user_id=session('id');
         $goods_id=explode(',',$goods_id);
-        $goods=Goods::join('cart','goods.goods_id','=','cart.goods_id')->where('user_id',$user_id)->whereIn('goods.goods_id',$goods_id)->get();
+        $goods=Goods::join('cart','goods.goods_id','=','cart.goods_id')->where(['user_id'=>$user_id,'is_del'=>1])->whereIn('goods.goods_id',$goods_id)->get();
         return view('payment',['goods'=>$goods]);
+    }
+    //支付成功
+    public function paysuccess()
+    {
+        return view("paysuccess");
+    }
+    //我的钱包
+    public function mywallet()
+    {
+        return view('mywallet');
+    }
+    //分享
+    public function invite()
+    {
+        return view('invite');
     }
 }
