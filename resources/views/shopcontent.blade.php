@@ -1,6 +1,22 @@
-@extends('must')
-@section('title','商品详情')
-@section('content')
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>商品详情</title>
+    <meta content="app-id=984819816" name="apple-itunes-app" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no, maximum-scale=1.0" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <link href="{{url('css/comm.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{url('css/goods.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{url('css/fsgallery.css')}}" rel="stylesheet" charset="utf-8">
+    <link rel="stylesheet" href="{{url('css/swiper.min.css')}}">
+    <style>
+        .Countdown-con {padding: 4px 15px 0px;}
+    </style>
+</head>
+
 <body fnav="2" class="g-acc-bg">
     <div class="page-group">
         <div id="page-photo-browser" class="page">
@@ -216,8 +232,13 @@
         </div>
     </div>
 </body>
-    @endsection
-@section('my-js')
+
+
+<script src="{{url('js/jquery-1.11.2.min.js')}}"></script>
+<script src="http://cdn.bootcss.com/flexslider/2.6.2/jquery.flexslider.min.js"></script>
+<script src="{{url('js/swiper.min.js')}}"></script>
+<script src="{{url('js/photo.js')}}" charset="utf-8"></script>
+<script src="{{url('layui/layui.js')}}"></script>
 <script>
     $(function () {
         layui.use('layer',function(){
@@ -308,5 +329,4 @@
         })
     })
 </script>
-@endsection
 
