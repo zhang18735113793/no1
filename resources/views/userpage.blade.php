@@ -14,9 +14,9 @@
         <a href="{{url('IndexController/set')}}"><i class="set"></i></a>
         <div class="login-img clearfix">
             <ul>
-                <li><img src="images/goods2.jpg" alt=""></li>
+                <li><img src="{{url('images/goods2.jpg')}}" alt=""></li>
                 <li class="name">
-                    <h3>兰兰</h3>
+                    <h3>{{$name}}</h3>
                     <p>ID：10030053</p>
                 </li>
                 <li class="next fr"><s></s></li>
@@ -31,7 +31,7 @@
     
     <div class="sub_nav marginB person-page-menu">
         <a href="{{url('IndexController/buyrecord')}}"><s class="m_s1"></s>购买记录<i></i></a>
-        <a href="/v44/member/orderlist.do"><s class="m_s2"></s>获得的商品<i></i></a>
+        {{--<a href="/v44/member/orderlist.do"><s class="m_s2"></s>获得的商品<i></i></a>--}}
         <a href="/v44/member/postlist.do"><s class="m_s3"></s>我的晒单<i></i></a>
         <a href="{{url('IndexController/mywallet')}}"><s class="m_s4"></s>我的钱包<i></i></a>
         <a href="{{url('IndexController/address')}}"><s class="m_s5"></s>收货地址<i></i></a>

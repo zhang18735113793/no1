@@ -26,15 +26,15 @@
             <ul class="w-content clearfix">
                 <li>
                     <a href="{{url('IndexController/edituser')}}">编辑个人资料</a>
-                    <s class="fr"></s>
+                    <a href="{{url('IndexController/edituser')}}"><s class="fr"></s></a>
                 </li>
                 <li>
-                    <a href="">邀请有奖</a>
-                    <s class="fr"></s>
+                    <a href="{{url('IndexController/invite')}}">邀请有奖</a>
+                    <a href="{{url('IndexController/invite')}}"><s class="fr"></s></a>
                 </li>
                 <li>
                     <a href="{{url('IndexController/safeset')}}">安全设置</a>
-                    <s class="fr"></s>
+                    <a href="{{url('IndexController/safeset')}}"><s class="fr"></s></a>
                 </li>
                 <li>
                     <a href="">客服热线（9:00-17:00）</a>

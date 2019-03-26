@@ -137,7 +137,8 @@ class IndexController extends Controller
         if(empty($id)){
             return view('login');
         }else{
-            return view('userpage');
+            $arr=UserModel::where('user_id',$id)->value('user_name');
+            return view('userpage',['name'=>$arr]);
         }
     }
     //商品详情

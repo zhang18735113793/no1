@@ -42,7 +42,7 @@
                     function(res){
                         if(res==1){
                             layer.msg('修改成功',{icon:1,time:2000},function(){
-                                history.go(0);
+                                location.href="{{url('IndexController/edituser')}}";
                             })
                         }else{
                             layer.msg('修改失败',{icon:2})

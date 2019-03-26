@@ -31,7 +31,7 @@
                 <li>
                     <a href="{{url('IndexController/nicknamemodify')}}">昵称</a>
                     <s class="fr"></s>
-                    <span class="fr">{{$arr->user_name}}</span>
+                    <span class="fr"><a href="{{url('IndexController/nicknamemodify')}}">{{$arr->user_name}}</a></span>
                 </li>
                 <li>
                     <a href="">我的主页</a>

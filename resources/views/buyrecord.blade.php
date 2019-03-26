@@ -28,17 +28,17 @@
     <div class="buyrecord-con clearfix">
         @foreach($data as $v)
         <div class="record-img fl">
-            <img src="\uploads\{{$v->goods_img}}" alt="">
+            <a href="{{url('IndexController/shopcontent')}}/{{$v->goods_id}}"><img src="\uploads\{{$v->goods_img}}" alt=""></a>
         </div>
         <div class="record-con fl">
             <h3>(第<i>87390潮</i>){{$v->goods_name}}</h3>
-            <p class="winner">获得者：<i>终于中了一次</i></p>
+            <p class="winner">获得者：<i></i></p>
             <div class="clearfix">
                 <div class="win-wrapp fl">
                     <p class="w-time">2017-06-30 11:11:11</p>
                     <p class="w-chao">第<i>23568</i>潮正在进行中...</p>
                 </div>
-                <div class="fr"><i class="buycart"></i></div>
+                {{--<div class="fr"><i class="buycart"></i></div>--}}
             </div>
         </div>
         @endforeach
