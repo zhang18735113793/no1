@@ -1,6 +1,18 @@
-﻿@extends('must')
-@section('title','all goods')
-@section('content')
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>商品列表</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="app-id=518966501" name="apple-itunes-app" />
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <link rel="stylesheet" href="{{url('css/mui.min_1.css')}}">
+    <link href="{{url('css/comm.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{url('css/goods.css')}}" rel="stylesheet" type="text/css" />
+</head>
+
 <body class="g-acc-bg" fnav="0" style="position: static">
 <div class="page-group">
     <div id="page-infinite-scroll-bottom" class="page">
@@ -125,9 +137,12 @@
 
 </body>
 </html>
-    @endsection
-@section('my-js')
-    <script>
+
+<script src="{{url('js/jquery-1.11.2.min.js')}}"></script>
+<script src="{{url('js/lazyload.min.js')}}"></script>
+<script src="{{url('js/mui.min.js')}}"></script>
+<script src="{{url('layui/layui.js')}}"></script>
+<script>
     $(function(){
     layui.use('layer',function(){
     var layer=layui.layer;
@@ -157,7 +172,6 @@
     })
     })
     </script>
-@endsection
 <script>
     jQuery(document).ready(function() {
         $("img.lazy").lazyload({
@@ -284,3 +298,4 @@
     // }
 
 </script>
+
