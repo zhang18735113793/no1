@@ -46,6 +46,40 @@ Route::prefix('IndexController')->group(function () {
     route::any('mywallet','IndexController@mywallet');
     //分享
     route::any('invite','IndexController@invite');
+    //找回密码
+    route::any('findpwd','IndexController@findpwd');
+    //管理收货地址address
+    route::any('address','IndexController@address');
+    //添加收货地址writeaddr
+    route::any('writeaddr','IndexController@writeaddr');
+    //执行添加地址
+    route::any('writeaddrdo','IndexController@writeaddrdo');
+    //删除地址addressdel
+    route::any('addressdel','IndexController@addressdel');
+    //设为默认addressdefault
+    route::any('addressdefault','IndexController@addressdefault');
+    //编辑收货地址addressupdate
+    route::any('addressupdate/{id}','IndexController@addressupdate');
+    //编辑收货地址执行addressupdatedo
+    route::any('addressupdatedo','IndexController@addressupdatedo');
+    //购买记录buyrecord
+    route::any('buyrecord','IndexController@buyrecord');
+    //设置
+    route::any('set','IndexController@set');
+    //安全设置
+    route::any('safeset','IndexController@safeset');
+    //修改登陆密码
+    route::any('loginpwd','IndexController@loginpwd');
+    //修改登陆密码执行
+    route::any('loginpwdup','IndexController@loginpwdup');
+    //个人资料
+    route::any('edituser','IndexController@edituser');
+    //修改昵称
+    route::any('nicknamemodify','IndexController@nicknamemodify');
+    //修改昵称执行
+    route::any('editname','IndexController@editname');
+    //退出登陆
+    route::any('getout','IndexController@getout');
 });
 //获取验证码图片
 route::any('verify/create','CaptchaController@create');

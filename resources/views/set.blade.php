@@ -8,8 +8,8 @@
     <meta content="yes" name="apple-mobile-web-app-capable" />
     <meta content="black" name="apple-mobile-web-app-status-bar-style" />
     <meta content="telephone=no" name="format-detection" />
-    <link href="css/comm.css" rel="stylesheet" type="text/css" />
-    <link href="css/mywallet.css" rel="stylesheet" type="text/css" />
+    <link href="{{url('css/comm.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{url('css/mywallet.css')}}" rel="stylesheet" type="text/css" />
     <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 <body>
@@ -25,7 +25,7 @@
         <div class="w-item">
             <ul class="w-content clearfix">
                 <li>
-                    <a href="">编辑个人资料</a>
+                    <a href="{{url('IndexController/edituser')}}">编辑个人资料</a>
                     <s class="fr"></s>
                 </li>
                 <li>
@@ -33,7 +33,7 @@
                     <s class="fr"></s>
                 </li>
                 <li>
-                    <a href="">安全设置</a>
+                    <a href="{{url('IndexController/safeset')}}">安全设置</a>
                     <s class="fr"></s>
                 </li>
                 <li>
@@ -44,7 +44,7 @@
             </ul>     
         </div>
         <div class="quit">
-            <a href="">退出登录</a>
+            <a href="{{url('IndexController/getout')}}">退出登录</a>
         </div>
     </div>
 </body>

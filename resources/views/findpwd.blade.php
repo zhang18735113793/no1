@@ -1,17 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-    <title>找回密码</title>
-    <meta content="app-id=984819816" name="apple-itunes-app" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no, maximum-scale=1.0" />
-    <meta content="yes" name="apple-mobile-web-app-capable" />
-    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
-    <meta content="telephone=no" name="format-detection" />
-    <link href="css/comm.css" rel="stylesheet" type="text/css" />
-    <link href="css/login.css" rel="stylesheet" type="text/css" />
-    <link href="css/find.css" rel="stylesheet" type="text/css" />
-</head>
+@extends("must")
+@section('title')
 <body>
     
 <!--触屏版内页头部-->
@@ -44,3 +32,4 @@
 </div>
 </body>
 </html>
+    @endsection

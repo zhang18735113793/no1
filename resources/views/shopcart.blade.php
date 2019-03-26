@@ -72,7 +72,7 @@
                                     </span>
                                 </p>
                             </div>
-                            <div class="gRate" goods_id="{{$v->goods_id}}" data-productid="23458">
+                            <div class="gRate" goods_id="{{$v->goods_id}}"  data-productid="23458">
                                 <a href="javascript:;"><s></s></a>
                             </div>
                         </div>
@@ -276,10 +276,13 @@
                 //点击结算
                 $(document).on('click','.payment',function(){
                     var goods_id='';
+
                     $(".g-Cart-list .xuan").each(function () {
                         if ($(this).hasClass("current")) {
+
                             for (var i = 0; i < $(this).length; i++) {
                                 goods_id += parseInt($(this).attr('goods_id'))+',';
+
                                 // aa += 1;
                             }
                         }

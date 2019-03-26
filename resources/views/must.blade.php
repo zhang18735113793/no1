@@ -26,11 +26,16 @@
     <link rel="stylesheet" href="{{url('css/paysuccess.css')}}">
     <link href="{{url('css/mywallet.css')}}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="{{url('css/invite.css')}}">
+    <link rel="stylesheet" href="{{url('css/address.css')}}">
+    <link rel="stylesheet" href="{{url('css/sm.css')}}">
+    <link rel="stylesheet" href="{{url('css/writeaddr.css')}}">
+    <link rel="stylesheet" href="{{url('dist/css/LArea.css')}}">
     <style>
         .Countdown-con {padding: 4px 15px 0px;}
     </style>
 </head>
 @yield('content')
+
 <script src="{{url('js/jquery190_1.js')}}" language="javascript" type="text/javascript"></script>
 <script src="{{url('js/jquery-1.11.2.min.js')}}"></script>
 <script src="{{url('layui/layui.js')}}"></script>
@@ -43,6 +48,10 @@
 <script src="{{url('js/swiper.min.js')}}"></script>
 <script src="{{url('js/photo.js')}}" charset="utf-8"></script>
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="{{url('dist/js/LArea.js')}}"></script>
+<script src="{{url('dist/js/LAreaData1.js')}}"></script>
+<script src="{{url('dist/js/LAreaData2.js')}}"></script>
+
 @yield('my-js')
 
 

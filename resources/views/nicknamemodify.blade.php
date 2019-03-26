@@ -8,27 +8,51 @@
     <meta content="yes" name="apple-mobile-web-app-capable" />
     <meta content="black" name="apple-mobile-web-app-status-bar-style" />
     <meta content="telephone=no" name="format-detection" />
-    <link href="css/comm.css" rel="stylesheet" type="text/css" />
-    <link href="css/mywallet.css" rel="stylesheet" type="text/css" />
+    <link href="{{url('css/comm.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{url('css/mywallet.css')}}" rel="stylesheet" type="text/css" />
     <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 <body>
-    
+<input type="hidden" name="_token" id="_token" value="<?php echo csrf_token()?>">
 <!--触屏版内页头部-->
 <div class="m-block-header" id="div-header">
     <strong id="m-title">昵称修改</strong>
     <a href="javascript:history.back();" class="m-back-arrow"><i class="m-public-icon"></i></a>
-    <a href="/" class="m-index-icon">完成</a>
+    <a href="javascript:;" class="m-index-icon editname">完成</a>
 </div>
 
 <div class="wallet-con">
     <div class="w-item">
-        <input type="text" placeholder="请输入昵称" class="input_key" id="keyword" value="lanlan"/>
+        <input type="text" placeholder="请输入昵称" class="input_key" id="keyword" value="{{$arr->user_name}}"/>
         <i id="clear">x</i>
     </div>
     <p>昵称长度为2-16个字符，由汉字、字母、数字或'_'组成。</p>
 </div>
-
+<script src="{{url('layui/layui.js')}}"></script>
+<script>
+    $(function(){
+        layui.use('layer',function(){
+            var layer=layui.layer;
+            $('.editname').click(function(){
+                var _token=$('#_token').val();
+                var name=$('#keyword').val();
+                $.post(
+                    "{{url('IndexController/editname')}}",
+                    {name:name,_token:_token},
+                    function(res){
+                        if(res==1){
+                            layer.msg('修改成功',{icon:1,time:2000},function(){
+                                history.go(0);
+                            })
+                        }else{
+                            layer.msg('修改失败',{icon:2})
+                        }
+                    }
+                )
+            })
+        })
+    })
+</script>
 <script>
     $(function(){
         // input框
@@ -55,7 +79,7 @@
                 var value = $('.input_key').val();
                 var reg = /^[a-zA-Z0-9_\u4e00-\u9fa5]+$/;
                 if (!reg.test(value)) {
-                   
+                   layer.msg('昵称格式错误',{icon:2})
                 }
                 });
         });
@@ -101,6 +125,8 @@
 })(jQuery);
 //调用演示
 $(selector).insertAtCaret("value");
+
 </script>
+
 </body>
 </html>

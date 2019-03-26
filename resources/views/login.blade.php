@@ -31,18 +31,24 @@
                     <dl>
                         <a id="btnLogin" href="javascript:;" class="orangeBtn loginBtn">登录</a>
                     </dl>
+                    <dl>
+                        <div class="forget" style="padding-top: 150px">
+                        <a href="https://m.1yyg.com/v44/passport/FindPassword.do">忘记密码？</a>
+                        <b></b>
+                        <a href="{{url('IndexController/register')}}">新用户注册</a>
+                        </div>
+                    </dl>
                 </li>
             </ul>
 
         </div>
 
         <br>
-        <div class="forget">
-            <a href="https://m.1yyg.com/v44/passport/FindPassword.do">忘记密码？</a>
-            <b></b>
-            <a href="{{url('IndexController/register')}}">新用户注册</a>
-        </div>
+
     </div>
+
+
+
 </div>
 </body>
 @endsection

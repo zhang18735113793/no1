@@ -8,6 +8,9 @@ use App\Model\Category;
 use App\Http\Requests\UserValidate;
 use  App\Model\UserModel;
 use App\Model\Cart;
+use App\Model\Address;
+use Illuminate\Support\Facades\DB;
+use App\Model\Buygoods;
 class IndexController extends Controller
 {
     //首页
@@ -254,6 +257,19 @@ class IndexController extends Controller
     //支付成功
     public function paysuccess()
     {
+        $goods_id=session('goods_id');
+        $user_id=session('id');
+        $goods_id=explode(',',$goods_id);
+        $goods=Goods::join('cart','goods.goods_id','=','cart.goods_id')->where(['user_id'=>$user_id,'is_del'=>1])->whereIn('goods.goods_id',$goods_id)->get();
+        foreach($goods as $v){
+            $goods_num=$v['goods_num']-$v['buy_num'];
+            Cart::where(['goods_id'=>$v['goods_id'],'user_id'=>$user_id])->update(['is_del'=>2]);
+            Goods::where('goods_id',$v['goods_id'])->update(['goods_num'=>$goods_num]);
+        }
+        session('goods_id',null);
+        foreach($goods_id as $v){
+            Buygoods::insert(['goods_id'=>$v,'user_id'=>$user_id]);
+        }
         return view("paysuccess");
     }
     //我的钱包
@@ -265,5 +281,193 @@ class IndexController extends Controller
     public function invite()
     {
         return view('invite');
+    }
+    //展示收货地址
+    public function address()
+    {
+        $user_id=session('id');
+        $data=Address::where(['user_id'=>$user_id,'is_del'=>1])->get();
+        return view("address",['data'=>$data]);
+    }
+    //添加收货地址
+    public function writeaddr()
+    {
+        return view('writeaddr');
+    }
+    //执行添加收货地址
+    public function writeaddrdo(Request $request)
+    {
+        $data=$request->obj;
+        $user_id=session('id');
+        $data['user_id']=$user_id;
+        if($data['is_default']==1){
+            //开启事务
+            DB::beginTransaction(); //开启事务
+            $result = Address::where('user_id',session("id"))->update(['is_default' => 2]);//改
+            $res = Address::insert($data);//添
+
+            if ($result !== false && $res) {
+                DB::commit();  //提交
+                echo 1;
+            } else {
+                DB::rollback();  //回滚
+                echo 2;
+            }
+        }else{
+            $res=Address::insert($data);
+            if($res){
+                echo 1;
+            }else{
+                echo 2;die;
+            }
+        }
+
+    }
+    //删除收货地址
+    public function addressdel(Request $request)
+    {
+        $address_id = $request->address_id;
+        $where = [
+            'address_id' => $address_id,
+            'user_id' => session('id'),
+        ];
+        $res = Address::where($where)->delete();
+        if ($res) {
+            echo 1;
+        } else {
+            echo 2;die;
+        }
+    }
+    //设为默认
+    public function addressdefault(Request $request)
+    {
+        $address_id = $request->address_id;
+        DB::beginTransaction(); //开启事务
+        $where = [
+            'user_id' => session("id"),
+            'address_id' => $address_id,
+        ];
+        $result = Address::where('user_id',session("id"))->update(['is_default' => 2]);
+        $res = Address::where($where)->update(['is_default' => 1]);
+        if ($result && $res) {
+            DB::commit();  //提交
+            echo 1;
+        } else {
+            DB::rollback();  //回滚
+            echo 2;die;
+        }
+    }
+    //收货地址编辑
+    public function addressupdate(Request $request)
+    {
+        $address_id=$request->id;
+        $data=Address::where('address_id',$address_id)->first();
+        return view('addressupdate',['data'=>$data]);
+    }
+    //收货地址编辑执行
+    public function addressupdatedo(Request $request)
+    {
+        $data = $request->obj;
+        //dd($data);die;
+        $id=$request->address_id;
+        $data['user_id'] = session("id");
+        $where = [
+            'user_id'=>session('id'),
+            'address_id' => $id,
+        ];
+        //dd($where);
+        if ($data['is_default'] ==1) {
+            DB::beginTransaction(); //开启事务
+            $result = Address::where('user_id',session("id"))->update(['is_default' => 2]);//改
+            $res = Address::where('address_id',$id)->update($data);//修改
+            if ($result !== false && $res) {
+                DB::commit();  //提交
+                echo 1;
+            } else {
+                DB::rollback();  //回滚
+                echo 2;die;
+            }
+        }else{
+            $res = Address::where($where)->update($data);//修改
+            if($res){
+                echo 1;
+            }else{
+                echo 2;
+            }
+        }
+    }
+    //购买记录
+    public function buyrecord()
+    {
+        $user_id=session('id');
+        $data=Buygoods::join('goods','goods.goods_id','=','buygoods.goods_id')->where(['user_id'=>$user_id])->get();
+        $arr=Goods::orderBy('send_num','desc')->limit(4)->get();
+        return view('buyrecord',['data'=>$data,'arr'=>$arr]);
+    }
+    //设置
+    public function set()
+    {
+        return view('set');
+    }
+    //安全设置
+    public function safeset()
+    {
+        return view('safeset');
+    }
+    //修改登陆密码
+    public function loginpwd()
+    {
+        return view('loginpwd');
+    }
+    //退出登陆
+    public function getout()
+    {
+        session('id',null);
+        return redirect('/');
+    }
+    //执行修改
+    public function loginpwdup(Request $request)
+    {
+        $nowpwd=$request->nowpwd;
+        $newpwd=$request->newpwd;
+        $newpwds=$request->newpwds;
+        $user_id=session('id');
+        $user=UserModel::where('user_id',$user_id)->first();
+        if(decrypt($user['pwd'])!=$nowpwd){
+            echo 3;exit;
+        }
+        if($newpwd!=$newpwds){
+            echo 4;exit;
+        }
+        $new=encrypt($newpwd);
+        $res=UserModel::where('user_id',$user_id)->update(['pwd'=>$new]);
+        if($res){
+            echo 1;
+        }else{
+            echo 2;exit;
+        }
+    }
+    //基础资料
+    public function edituser()
+    {
+        $arr=UserModel::where('user_id',session('id'))->first();
+        return view('edituser',['arr'=>$arr]);
+    }
+    //修改nicheng
+    public function nicknamemodify()
+    {
+        $arr=UserModel::where('user_id',session('id'))->first();
+        return view('nicknamemodify',['arr'=>$arr]);
+    }
+    //修改执行
+    public function editname(Request $request)
+    {
+        $name=$request->name;
+        $res=UserModel::where('user_id',session('id'))->update(['user_name'=>$name]);
+        if($res){
+            echo 1;
+        }else{
+            echo 2;exit;
+        }
     }
 }

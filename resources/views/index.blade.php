@@ -191,18 +191,6 @@
 @section('my-js')
 	<script>
         $(function(){
-            $('.hotimg').flexslider({
-                directionNav: false,   //是否显示左右控制按钮
-                controlNav: true,   //是否显示底部切换按钮
-                pauseOnAction: false,  //手动切换后是否继续自动轮播,继续(false),停止(true),默认true
-                animation: 'slide',   //淡入淡出(fade)或滑动(slide),默认fade
-                slideshowSpeed: 3000,  //自动轮播间隔时间(毫秒),默认5000ms
-                animationSpeed: 150,   //轮播效果切换时间,默认600ms
-                direction: 'horizontal',  //设置滑动方向:左右horizontal或者上下vertical,需设置animation: "slide",默认horizontal
-                randomize: false,   //是否随机幻切换
-                animationLoop: true   //是否循环滚动
-            });
-            setTimeout($('.flexslider img').fadeIn());
             layui.use('layer',function(){
                 var layer=layui.layer;
                 $(document).on('click','.gRate',function(){
@@ -225,6 +213,19 @@
                     )
                 })
             })
+            $('.hotimg').flexslider({
+                directionNav: false,   //是否显示左右控制按钮
+                controlNav: true,   //是否显示底部切换按钮
+                pauseOnAction: false,  //手动切换后是否继续自动轮播,继续(false),停止(true),默认true
+                animation: 'slide',   //淡入淡出(fade)或滑动(slide),默认fade
+                slideshowSpeed: 3000,  //自动轮播间隔时间(毫秒),默认5000ms
+                animationSpeed: 150,   //轮播效果切换时间,默认600ms
+                direction: 'horizontal',  //设置滑动方向:左右horizontal或者上下vertical,需设置animation: "slide",默认horizontal
+                randomize: false,   //是否随机幻切换
+                animationLoop: true   //是否循环滚动
+            });
+            setTimeout($('.flexslider img').fadeIn());
+
         })
 	</script>
 	<script>
