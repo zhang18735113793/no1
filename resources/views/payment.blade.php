@@ -19,10 +19,9 @@
                         </span>
                         <dl>
                             <dt>
-                                
                                    {{$v->goods_name}}
                             </dt>
-                            <dd><em class="price">{{$v->buy_num}}</em>人次/<em>￥{{$v->self_price}}</em></dd>
+                            <dd><em class="price">{{$v->buy_num}}</em>人次/<em>{{$v->self_price}}</em></dd>
                         </dl>
                     </a>
                 </li>
@@ -31,7 +30,7 @@
             <div id="divMore">
                 
             </div>
-            <p class="gray9">总需支付金额：<em class="orange"><i>￥</i>{{$v->self_price*$v->buy_num}}</em></p>
+            <p class="gray9">总需支付金额：<em class="orange"></em></p>
         </div>
         <div class="other_pay marginB">
             
@@ -42,7 +41,7 @@
             	<i></i>账户总额：<span class="gray9">(￥<em>0.00</em>)</span><em class="orange fr"></em>
             </a>
             <a href="javascript:;" class="wzf checked">
-            	<b class="z-set"></b>第三方支付<em class="orange fr"><span class="colorbbb">需要支付&nbsp;</span><b>￥</b>{{$v->self_price*$v->buy_num}}</em>
+            	<b class="z-set"></b>第三方支付<em class="orange fr"><span class="colorbbb">需要支付&nbsp;</span><b>￥</b></em>
             </a>
             <div class="net-pay">
                 <a href="javascript:;" class="checked" id="jdPay">
@@ -61,8 +60,8 @@
         </div>
         <div class="paywrapp" style="display: none">
             <span class="lip">请输入支付密码</span>    
-            <span class="title">潮人购充值</span>
-            <span class="money">￥<i>{{$v->self_price*$v->buy_num}}</i></span>
+            {{--<span class="title">潮人购充值</span>--}}
+            <span class="money">￥<i></i></span>
             <form action="" method="post" name="payPassword" id="form_paypsw">
                 <div id="payPassword_container" class="alieditContainer clearfix" data-busy="0">
                     <div class="i-block" data-error="i_error">
@@ -95,14 +94,16 @@
 	
 	$(document).ready(function(){
 		var total=0;
-		console.log($('.g-pay-lst li').length);
+		//console.log($('.g-pay-lst li').length);
 		for(var i = 0;i<$('.g-pay-lst li').length;i++){
 		
-			total +=parseInt($('.g-pay-lst li').eq(i).find('dd em.price').text());
+			total +=parseInt($('.g-pay-lst li').eq(i).find('dd em.price').text())*$('.g-pay-lst li').eq(i).find('dd em.price').next('em').text();
 
 		}
-		//$('.gray9 .orange').html('<i>￥</i>'+total.toFixed(2));
-		//$('.wzf .orange').html('<span class="colorbbb">需要支付&nbsp;</span><b>￥</b>'+total.toFixed(2));
+		console.log(total);
+		$('.gray9 .orange').html('<i>￥</i>'+total.toFixed(2));
+		$('.wzf .orange').html('<span class="colorbbb">需要支付&nbsp;</span><b>￥</b>'+total.toFixed(2));
+		$('.money').html('<span class="colorbbb">需要支付&nbsp;</span><b>￥</b>'+total.toFixed(2));
 
 		// 判断选择余额支付还是潮购值支付
 		var chaomoney =parseInt($('.other_pay .chaomoney span.gray9 em').text())/100;
@@ -132,7 +133,7 @@
 
     // 密码框
     var payPassword = $("#payPassword_container"),
-    _this = payPassword.find('i'),  
+    _this = payPassword.find('i'),
     k=0,j=0,
     password = '' ,
     _cardwrap = $('#cardwrap');
@@ -140,25 +141,25 @@
     payPassword.on('focus',"input[name='payPassword_rsainput']",function(){
     
         var _this = payPassword.find('i');
-        if(payPassword.attr('data-busy') === '0'){ 
+        if(payPassword.attr('data-busy') === '0'){
         //在第一个密码框中添加光标样式
            _this.eq(k).addClass("active");
            _cardwrap.css('visibility','visible');
            payPassword.attr('data-busy','1');
         }
-        
-    }); 
+
+    });
     //change时去除输入框的高亮，用户再次输入密码时需再次点击
     payPassword.on('change',"input[name='payPassword_rsainput']",function(){
         _cardwrap.css('visibility','hidden');
         _this.eq(k).removeClass("active");
         payPassword.attr('data-busy','0');
     }).on('blur',"input[name='payPassword_rsainput']",function(){
-        
+
         _cardwrap.css('visibility','hidden');
-        _this.eq(k).removeClass("active");                  
+        _this.eq(k).removeClass("active");
         payPassword.attr('data-busy','0');
-        
+
     });
     
     //使用keyup事件，绑定键盘上的数字按键和backspace按键
@@ -170,34 +171,34 @@
     if(e.keyCode == 8 || (e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105)){
             k = this.value.length;//输入框里面的密码长度
             l = _this.size();//6
-            
+
             for(;l--;){
-            
+
             //输入到第几个密码框，第几个密码框就显示高亮和光标（在输入框内有2个数字密码，第三个密码框要显示高亮和光标，之前的显示黑点后面的显示空白，输入和删除都一样）
                 if(l === k){
                     _this.eq(l).addClass("active");
                     _this.eq(l).find('b').css('visibility','hidden');
-                    
+
                 }else{
                     _this.eq(l).removeClass("active");
                     _this.eq(l).find('b').css('visibility', l < k ? 'visible' : 'hidden');
-                    
-                }               
-            
+
+                }
+
             if(k === 6){
                 j = 5;
             }else{
                 j = k;
             }
             $('#cardwrap').css('left',j*43+'px');
-        
+
             }
         }else{
         //输入其他字符，直接清空
             var _val = this.value;
             this.value = _val.replace(/\D/g,'');
         }
-    }); 
+    });
 
 
     $('#btnPay').click(function(){

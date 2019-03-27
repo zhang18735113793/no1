@@ -145,12 +145,12 @@
 <script>
     $(function(){
     layui.use('layer',function(){
-    var layer=layui.layer;
-    if($('.aa').attr('cateid')!=''){
-    $('#sp').removeClass('current');
-    };
+        var layer=layui.layer;
+        if($('.aa').attr('cateid')!=''){
+            $('#sp').removeClass('current');
+        };
 
-    $(document).on('click','.goods',function(){
+        $(document).on('click','.goods',function(){
         var goods_id=$(this).attr('goods_id');
         var _token=$('#_token').val();
         $.post(
@@ -169,6 +169,16 @@
     }
     )
     })
+        {{--$(document).on('blur','#txtSearch',function(){--}}
+            {{--var search=$(this).val();--}}
+            {{--$.post(--}}
+                {{--"{{url('IndexController/allshops')}}",--}}
+                 {{--{search:search},--}}
+                {{--function(res){--}}
+                    {{----}}
+                {{--}--}}
+            {{--)--}}
+        {{--})--}}
     })
     })
     </script>

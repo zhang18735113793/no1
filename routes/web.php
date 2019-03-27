@@ -12,6 +12,11 @@
 */
 
 Route::any('/','IndexController@index');
+Route::prefix('PayController')->group(function(){
+    route::get('mobilepay/{id?}','PayController@mobilepay');
+    route::get('re','PayController@re');
+    route::get('notify','PayController@notify');
+});
 Route::prefix('IndexController')->group(function () {
     //所有商品
     route::any('allshops/{id?}','IndexController@allshops');
@@ -80,6 +85,14 @@ Route::prefix('IndexController')->group(function () {
     route::any('editname','IndexController@editname');
     //退出登陆
     route::any('getout','IndexController@getout');
+    //晒单展示
+    route::any('willshare/{id?}','IndexController@willshare');
+    //晒单执行
+    route::any('shar','IndexController@shar');
+    //晒单执行完成
+    route::any('sharedetail/{id?}','IndexController@sharedetail');
+    //所有晒单share
+    route::any('share/{id?}','IndexController@share');
 });
 //获取验证码图片
 route::any('verify/create','CaptchaController@create');

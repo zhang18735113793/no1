@@ -8,7 +8,7 @@
     <meta content="yes" name="apple-mobile-web-app-capable" />
     <meta content="black" name="apple-mobile-web-app-status-bar-style" />
     <meta content="telephone=no" name="format-detection" />
-    <link href="{{url('css/comm.css')}}}" rel="stylesheet" type="text/css" />
+    <link href="{{url('css/comm.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('css/mywallet.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('css/safeset.css')}}" rel="stylesheet" type="text/css" />
     <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -25,11 +25,12 @@
     <div class="wallet-con">
         <div class="w-item">
             <ul class="w-content clearfix">
-                <li>
+            <li>
                     <em class="login"></em>
                     <a href="{{url('IndexController/loginpwd')}}">登录密码</a>
                     <s class="fr"></s>
-                    <span class="fr">修改</span>
+                    <span class="fr"> <a href="{{url('IndexController/loginpwd')}}">修改</a></span>
+
                 </li>
                 <li>
                     <em class="pay"></em>

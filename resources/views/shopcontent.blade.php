@@ -70,7 +70,7 @@
                         {{$arr->goods_name}}</span>
                     </h2>
                     <div class="purchase-txt gray9 clearfix">
-                        价值：￥{{$arr->self_price}}
+                        价值：￥{{$arr->self_price}} 库存: ￥{{$arr->goods_num}}
                     </div>
                     <div class="clearfix">
                         
@@ -225,7 +225,7 @@
                            
                 <div class="pro_foot"> 
                         <a href="" class="">第10364潮正在进行中<span class="dotting"></span></a>
-                        <a href="" class="shopping">立即参与</a>
+                        <a href="{{url('PayController/mobilepay')}}/{{$arr->goods_id}}" class="shopping">立即参与</a>
                         <span href="" class="fr gRate" goods_id="{{$arr->goods_id}}"><i><b num="1">1</b></i></span>
                 </div>
             </div>

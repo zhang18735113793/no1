@@ -29,7 +29,7 @@
         <form class="layui-form" action="">
             <div class="registerCon regwrapp">
                 <div class="account">
-                    <em>账户名：</em> <i>155****3866</i>
+                    <em>账户名：</em> <i>{{$tel}}</i>
                 </div>
                 <div><em>当前密码</em><input type="password" class="nowpwd"></div>
                 <div><em>新密码</em><input type="password" class="newpwd" placeholder="请输入6-16位数字、字母组成的新密码"></div>
@@ -57,7 +57,7 @@ $(function(){
                 function(res){
                     if(res==1){
                         layer.msg("修改成功",{icon:1,time:3000},function(){
-                            history.go(0);
+                            location.href="{{url('IndexController/safeset')}}"
                         })
                     }else if(res==3){
                         layer.msg("原始密码错误",{icon:2})

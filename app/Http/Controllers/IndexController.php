@@ -418,7 +418,10 @@ class IndexController extends Controller
     //修改登陆密码
     public function loginpwd()
     {
-        return view('loginpwd');
+        $id=session('id');
+        $user=UserModel::where('user_id',$id)->first();
+        $tel=substr($user['username'],0,3)."****".substr($user['username'],7,4);
+        return view('loginpwd',['tel'=>$tel]);
     }
     //退出登陆
     public function getout()
@@ -470,5 +473,50 @@ class IndexController extends Controller
         }else{
             echo 2;exit;
         }
+    }
+    //晒单展示
+    public function willshare(Request $request)
+    {
+        $goods_id=$request->id;
+        $goods=Goods::where('goods_id',$goods_id)->first();
+        return view('willshare',['goods'=>$goods]);
+    }
+    //晒单执行
+    public function shar(Request $request)
+    {
+       $shartitle=$request->shartitle;
+       $sharcontent=$request->sharcontent;
+       $goods_id=$request->goods_id;
+
+       $where=[
+           'goods_id'=>$goods_id,
+           'user_id'=>session('id')
+       ];
+        $res=Buygoods::where($where)->update(['shartitle'=>$shartitle,'sharcontent'=>$sharcontent]);
+        if($res){
+            echo 1;
+        }else{
+            echo 2;exit;
+        }
+    }
+    //晒单完成
+    public function sharedetail(Request $request)
+    {
+        $goods_id=$request->id;
+        $where=[
+            'goods_id'=>$goods_id,
+            'user_id'=>session('id')
+        ];
+        $arr=Buygoods::where($where)->first();
+        $data=Goods::where('goods_id',$arr['goods_id'])->first();
+        $sendgoods=Goods::orderBy('send_num','desc')->limit(4)->get();
+        return view('sharedetail',['arr'=>$arr,'data'=>$data,'sendgoods'=>$sendgoods]);
+    }
+    //所有晒单
+    public function share()
+    {
+        $id=session('id');
+        $res=Buygoods::join('goods','buygoods.goods_id','=','goods.goods_id')->where(['user_id'=>$id])->get();
+        return view('share',['res'=>$res]);
     }
 }
