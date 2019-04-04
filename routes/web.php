@@ -96,3 +96,4 @@ Route::prefix('IndexController')->group(function () {
 });
 //获取验证码图片
 route::any('verify/create','CaptchaController@create');
+route::any('wx','WxController@index');
